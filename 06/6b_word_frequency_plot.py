@@ -21,12 +21,8 @@ learning and artificial intelligence will keep changing how we live and work."""
 
 # Step 1: preprocess - lowercase, tokenize, drop stop words and punctuation
 stop_words = set(stopwords.words("english"))
-
-def preprocess(text):
-    tokens = word_tokenize(text.lower())
-    return [w for w in tokens if w.isalpha() and w not in stop_words]
-
-words = preprocess(text)
+tokens = word_tokenize(text.lower())
+words = [w for w in tokens if w.isalpha() and w not in stop_words]
 
 # Step 2: count how often each word appears
 freq = FreqDist(words)
