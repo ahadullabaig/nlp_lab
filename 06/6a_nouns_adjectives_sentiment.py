@@ -5,6 +5,13 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.sentiment import SentimentIntensityAnalyzer
 
+# Download the NLTK data this program needs (skipped if already downloaded)
+nltk.download("punkt", quiet=True)                           # tokenizer (old NLTK)
+nltk.download("punkt_tab", quiet=True)                       # tokenizer (new NLTK)
+nltk.download("averaged_perceptron_tagger", quiet=True)      # POS tagger (old NLTK)
+nltk.download("averaged_perceptron_tagger_eng", quiet=True)  # POS tagger (new NLTK)
+nltk.download("vader_lexicon", quiet=True)                   # sentiment scores
+
 sentence = "The hotel has a beautiful garden and friendly staff, but the rooms are dirty."
 
 # Step 1: tag every word with its part of speech

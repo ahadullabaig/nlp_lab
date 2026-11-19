@@ -4,6 +4,14 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 
+# Download the NLTK data this program needs (skipped if already downloaded)
+nltk.download("punkt", quiet=True)                           # tokenizer (old NLTK)
+nltk.download("punkt_tab", quiet=True)                       # tokenizer (new NLTK)
+nltk.download("averaged_perceptron_tagger", quiet=True)      # POS tagger (old NLTK)
+nltk.download("averaged_perceptron_tagger_eng", quiet=True)  # POS tagger (new NLTK)
+nltk.download("wordnet", quiet=True)                         # lemmatizer dictionary
+nltk.download("omw-1.4", quiet=True)                         # extra WordNet data (some NLTK versions)
+
 text = "The children were playing happily and their mothers felt better after watching the boats."
 
 # Morphological analysis: the POS tag tells us the form of each word

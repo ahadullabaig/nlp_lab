@@ -1,9 +1,15 @@
 # 7b. Create a collection of 3 documents, find the frequency of bigrams in the
 #     collection, count the bigrams and display the top 5 most common.
 
+import nltk
 from nltk import ngrams, FreqDist
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+
+# Download the NLTK data this program needs (skipped if already downloaded)
+nltk.download("punkt", quiet=True)        # tokenizer (old NLTK)
+nltk.download("punkt_tab", quiet=True)    # tokenizer (new NLTK)
+nltk.download("stopwords", quiet=True)    # stop word list
 
 documents = [
     "Natural language processing helps computers understand human language. "

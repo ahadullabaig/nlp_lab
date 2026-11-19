@@ -4,12 +4,18 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+# Download the NLTK data this program needs (skipped if already downloaded)
+nltk.download("punkt", quiet=True)        # tokenizer (old NLTK)
+nltk.download("punkt_tab", quiet=True)    # tokenizer (new NLTK)
+nltk.download("stopwords", quiet=True)    # stop word list
 
 # Step 1: load the dataset (this file is not UTF-8, so we give the encoding)
 df = pd.read_csv("spam.csv", encoding="latin-1")

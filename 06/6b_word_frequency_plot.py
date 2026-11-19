@@ -2,9 +2,15 @@
 #     without stop words and punctuation.
 
 import matplotlib.pyplot as plt
+import nltk
 from nltk import FreqDist
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+
+# Download the NLTK data this program needs (skipped if already downloaded)
+nltk.download("punkt", quiet=True)        # tokenizer (old NLTK)
+nltk.download("punkt_tab", quiet=True)    # tokenizer (new NLTK)
+nltk.download("stopwords", quiet=True)    # stop word list
 
 text = """Artificial intelligence is changing the world. Machine learning is a part of
 artificial intelligence, and deep learning is a part of machine learning. Today,

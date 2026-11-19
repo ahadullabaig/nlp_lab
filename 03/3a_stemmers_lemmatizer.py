@@ -1,7 +1,13 @@
 # 3a. Compare different stemmers (Porter, Lancaster, Snowball)
 #     with the WordNet lemmatizer.
 
+import nltk
 from nltk.stem import PorterStemmer, LancasterStemmer, SnowballStemmer, WordNetLemmatizer
+
+# Download the NLTK data this program needs (skipped if already downloaded)
+# The stemmers need no data, only the lemmatizer does.
+nltk.download("wordnet", quiet=True)      # lemmatizer dictionary
+nltk.download("omw-1.4", quiet=True)      # extra WordNet data (some NLTK versions)
 
 porter = PorterStemmer()
 lancaster = LancasterStemmer()

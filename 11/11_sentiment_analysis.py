@@ -5,10 +5,17 @@
 import re
 import pandas as pd
 import matplotlib.pyplot as plt
+import nltk
 from nltk import FreqDist
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.sentiment import SentimentIntensityAnalyzer
+
+# Download the NLTK data this program needs (skipped if already downloaded)
+nltk.download("punkt", quiet=True)          # tokenizer (old NLTK)
+nltk.download("punkt_tab", quiet=True)      # tokenizer (new NLTK)
+nltk.download("stopwords", quiet=True)      # stop word list
+nltk.download("vader_lexicon", quiet=True)  # sentiment scores
 
 # Step 1: load the dataset
 df = pd.read_csv("vaccination_tweets.csv")

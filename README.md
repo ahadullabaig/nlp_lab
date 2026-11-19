@@ -16,8 +16,9 @@ On a new machine:
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-python setup_nltk.py          # downloads the NLTK data (tokenizer, stop words, tagger, WordNet, VADER)
 ```
+
+Each program downloads the NLTK data it needs (`nltk.download(...)` lines at the top), so there is no separate data step. The first run needs internet; after that the data is reused. `python setup_nltk.py` is optional — it downloads everything at once in advance.
 
 ## Running a program
 
@@ -32,7 +33,7 @@ python 1a_extract_email_date_phone.py
 - **12** needs `spam.csv` in `12/`. It's usually found on Kaggle in the "SMS Spam Collection Dataset". Column `v1` holds the label and `v2` the message.
 - **5b**, **6b**, **11** and **12** open windows (a parse tree or a graph). Close each window to let the program continue.
 - On computers with Tk 9, `tree.draw()` in **5b** crashes with `ValueError: ... '10c'` because of an NLTK bug. The `.venv` here has a one-line fix in `nltk/draw/util.py`, so the window works on this laptop. Reinstalling or upgrading NLTK removes the fix. On other computers, the text tree printed just before `tree.draw()` shows the same result.
-- If you see `LookupError: Resource ... not found`, run `python ../setup_nltk.py` from the program's folder.
+- If you see `LookupError: Resource ... not found`, the download at the top of the program failed (usually no internet). Connect and run it again, or run `python ../setup_nltk.py` from the program's folder.
 
 ## Learning sequence
 

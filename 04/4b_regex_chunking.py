@@ -4,6 +4,12 @@
 import nltk
 from nltk.tokenize import word_tokenize
 
+# Download the NLTK data this program needs (skipped if already downloaded)
+nltk.download("punkt", quiet=True)                           # tokenizer (old NLTK)
+nltk.download("punkt_tab", quiet=True)                       # tokenizer (new NLTK)
+nltk.download("averaged_perceptron_tagger", quiet=True)      # POS tagger (old NLTK)
+nltk.download("averaged_perceptron_tagger_eng", quiet=True)  # POS tagger (new NLTK)
+
 sentence = "The little yellow dog barked at the big black cat near the old wooden house."
 
 # Step 1: tag every word with its part of speech
