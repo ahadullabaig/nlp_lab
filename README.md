@@ -90,7 +90,7 @@ Learn these once and you'll recognise them across most of the programs:
 
 | Pattern | Looks like | Used in |
 |---|---|---|
-| Preprocessing | `word_tokenize(text.lower())`, then keep `w.isalpha() and w not in stop_words` | 1b, 2b, 6b, 7b, 11, 12 |
+| Preprocessing | `word_tokenize(text.lower())`, then keep `w.isalpha() and w not in stop_words` | 1b, 2b, 6b, 7b, 11 |
 | Counting | `FreqDist(...)` counts everything; `.most_common(n)` gives the top n | 2b, 6b, 7b, 11 |
 | Tag → chunk | `pos_tag` → `RegexpParser(grammar).parse(tagged)` | 4b, 5b, 6a |
 | Reading the chunks | `for subtree in tree.subtrees():` and check `subtree.label()` | 4b, 6a |
