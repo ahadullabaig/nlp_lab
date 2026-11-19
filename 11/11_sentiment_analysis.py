@@ -2,9 +2,6 @@
 #     Dataset: vaccination_tweets.csv (put it in this folder).
 #     Only the "text" column (the tweet) is used.
 
-import re
-import pandas as pd
-import matplotlib.pyplot as plt
 import nltk
 from nltk import FreqDist
 from nltk.tokenize import word_tokenize
@@ -18,20 +15,18 @@ nltk.download("stopwords", quiet=True)      # stop word list
 nltk.download("vader_lexicon", quiet=True)  # sentiment scores
 
 # Step 1: load the dataset
+import pandas as pd
+
 df = pd.read_csv("vaccination_tweets.csv")
-print("Columns:", list(df.columns))
-print("Number of tweets:", len(df))
+
+# print("Columns:", list(df.columns))
+# print("Number of tweets:", len(df))
 
 df = df[["text"]].dropna()
 
-# Step 2: clean each tweet - remove links, @mentions and the # symbol
-def clean_tweet(tweet):
-    tweet = re.sub(r"http\S+", "", tweet)    # links
-    tweet = re.sub(r"@\w+", "", tweet)       # @mentions
-    tweet = tweet.replace("#", "")           # keep the hashtag word, drop the #
-    return tweet.strip()
-
-df["clean_text"] = df["text"].apply(clean_tweet)
+# Step 2: remove links (almost every tweet has one, and "https" would
+#         otherwise be the most common word in Step 6)
+df["text"] = df["text"].str.replace(r"http\S+", "", regex=True)
 
 # Step 3: score each tweet with VADER and label it (same labels as program 6a).
 # Stop words are NOT removed here, because words like "not" change the sentiment.
@@ -48,26 +43,20 @@ def get_label(score):
     else:
         return "Neutral"
 
-df["score"] = df["clean_text"].apply(get_score)
+df["score"] = df["text"].apply(get_score)
 df["sentiment"] = df["score"].apply(get_label)
 
 print("\nFirst 5 tweets with their sentiment:")
-print(df[["clean_text", "score", "sentiment"]].head())
+print(df[["text", "score", "sentiment"]].head())
 
 # Step 4: how many tweets are positive, negative and neutral
 counts = df["sentiment"].value_counts()
 print("\nSentiment counts:")
 print(counts)
-print("\nPercentage:")
-print((counts / len(df) * 100).round(2))
-
-print("\nExample tweets:")
-for label in ["Positive", "Negative", "Neutral"]:
-    print(f"\n{label}:")
-    for tweet in df[df["sentiment"] == label]["clean_text"].head(3):
-        print(" -", tweet)
 
 # Step 5: bar chart of the sentiment counts (close the window to continue)
+import matplotlib.pyplot as plt
+
 counts.plot(kind="bar", title="Sentiment of vaccination tweets")
 plt.xlabel("Sentiment")
 plt.ylabel("Number of tweets")
@@ -75,16 +64,11 @@ plt.show()
 
 # Step 6: most common words in all tweets (same steps as program 6b)
 stop_words = set(stopwords.words("english"))
+text = " ".join(df["text"])          # all tweets joined into one big text
+tokens = word_tokenize(text.lower())
+words = [w for w in tokens if w.isalpha() and w not in stop_words]
 
-def preprocess(text):
-    tokens = word_tokenize(text.lower())
-    return [w for w in tokens if w.isalpha() and w not in stop_words]
-
-all_words = []
-for tweet in df["clean_text"]:
-    all_words.extend(preprocess(tweet))
-
-freq = FreqDist(all_words)
+freq = FreqDist(words)
 print("\nTop 10 words in the tweets:")
 for word, count in freq.most_common(10):
     print(f"{word:<15}{count}")

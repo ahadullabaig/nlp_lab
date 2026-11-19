@@ -81,7 +81,7 @@ Difficulty: ★ easy · ★★ moderate · ★★★ tricky · ★★★★ hard
 ### Stage 6 — Case studies
 | # | Program | Difficulty | What you learn |
 |---|---|---|---|
-| 18 | [11](11/11_sentiment_analysis.py) Vaccination tweet sentiment | ★★★ | pandas, cleaning tweets, VADER on every row, bar chart |
+| 18 | [11](11/11_sentiment_analysis.py) Vaccination tweet sentiment | ★★★ | pandas, removing links, VADER on every row, bar chart |
 | 19 | [12](12/12_spam_detection.py) SMS spam detection | ★★★★ | Bag of words (`CountVectorizer`), Naive Bayes, accuracy and confusion matrix |
 
 ## Patterns that repeat
